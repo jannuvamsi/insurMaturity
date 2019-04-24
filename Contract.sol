@@ -12,11 +12,13 @@ contract Inheritance {
         deceased = false;
     }
     
+    //Check whether the person is owner
     modifier oneOwner {
         require (msg.sender == owner);
         _;
     }
     
+    //Check for status of the insured item
     modifier isDeceased {
         require (deceased == true);
         _;
@@ -36,7 +38,7 @@ contract Inheritance {
             wallets[i].transfer(inheritance[wallets[i]]);
         }
     }
-    
+    //Checking for the item maturity is over
     function died() public oneOwner {
         deceased = true;
         moneyPaid();
