@@ -12,6 +12,16 @@ contract Inheritance {
         deceased = false;
     }
     
+    modifier oneOwner {
+        require (msg.sender == owner);
+        _;
+    }
+    
+    modifier isDeceased {
+        require (deceased == true);
+        _;
+    }
+    
     address[] wallets;
     
     mapping (address => uint) inheritance;
