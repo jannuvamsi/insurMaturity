@@ -25,5 +25,21 @@ contract Inheritance {
     address[] wallets;
     
     mapping (address => uint) inheritance;
+    
+    function setup(address _wallet, uint _inheritance) public oneOwner {
+        wallets.push(_wallet);
+        inheritance[_wallet] = _inheritance;
+    }
+    
+    function moneyPaid() private isDeceased {
+        for (uint i=0; 0<wallets.length; i++) {
+            wallets[i].transfer(inheritance[wallets[i]]);
+        }
+    }
+    
+    function died() public oneOwner {
+        deceased = true;
+        moneyPaid();
+    }
 
 }
